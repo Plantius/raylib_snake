@@ -1,6 +1,6 @@
 #ifndef SNAKE_H
 #define SNAKE_H
-#include "/home/niels/projects/game_projects/raylib/src/raylib.h"
+#include "raylib.h"
 
 enum class direction {UP, DOWN, LEFT, RIGHT, NON};
 

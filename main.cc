@@ -1,10 +1,10 @@
-#include "/home/niels/projects/game_projects/raylib/src/raylib.h"
+#include "raylib.h"
 #include "snake.h"
 #include <iostream>
 
 #define FPS 60
 
-#define MOVEMENT_SPEED 100.0f
+#define MOVEMENT_SPEED 200.0f
 
 void updatePlayer(snake* player, float delta, int &signX, int &signY){
     if (IsKeyDown(KEY_UP)){
@@ -27,8 +27,10 @@ int main()
 {
     const int windowWidth = 800;
     const int windowHeight = 450;
-    Vector2 startPos = {windowWidth/2, windowHeight/2};
-    snake player(startPos, 0);
+    snake player({windowWidth/2, windowHeight/2}, 0);
+
+    // Define Objects
+    Rectangle playerRec = {player.getPosition().x, player.getPosition().y, 40, 40};
     float deltaTime = 0;
     int signX = 0, signY = 0;
 
@@ -39,13 +41,13 @@ int main()
         // UPDATE PLAYER
         deltaTime = GetFrameTime();
         updatePlayer(&player, deltaTime, signX, signY);
-        std::cout << player.getPosition().x << ","<<player.getPosition().y << std::endl;
+
         // DRAW PLAYER
         BeginDrawing();
         
         ClearBackground(RAYWHITE);
 
-        Rectangle playerRec = {player.getPosition().x, player.getPosition().y, 40, 40};
+        playerRec.x = player.getPosition().x, playerRec.y = player.getPosition().y;
         DrawRectangleRec(playerRec, PINK);
 
         EndDrawing();
