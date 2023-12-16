@@ -10,23 +10,29 @@ int main()
     int posX = windowWidth/2, posY = windowHeight/2;
 
     int movementSpeed = 5;
-
+    int signX = 0, signY = 0;
     InitWindow(windowWidth, windowHeight, "Snake -- raylib");
     SetTargetFPS(FPS);
 
     while(!WindowShouldClose()){
         BeginDrawing();
-
+        
         if (IsKeyDown(KEY_UP)){
-            posY -= movementSpeed;
-        }if (IsKeyDown(KEY_DOWN)){
-            posY += movementSpeed;
-        }if (IsKeyDown(KEY_LEFT)){
-            posX -= movementSpeed;
-        }if (IsKeyDown(KEY_RIGHT)){
-            posX += movementSpeed;
+            signY = -1;
+            signX = 0;
+        }else if (IsKeyDown(KEY_DOWN)){
+            signY = 1;
+            signX = 0;
+        }else if (IsKeyDown(KEY_LEFT)){
+            signX = -1;
+            signY = 0;
+        }else if (IsKeyDown(KEY_RIGHT)){
+            signX = 1;
+            signY = 0;
         }
 
+        posY += signY*movementSpeed;
+        posX += signX*movementSpeed;
         ClearBackground(RAYWHITE);
         DrawCircle(posX, posY, 30, LIGHTGRAY);
 
