@@ -48,7 +48,7 @@
 PLATFORM              ?= PLATFORM_DESKTOP
 
 # Define required raylib variables
-PROJECT_NAME          ?= raylib_examples
+PROJECT_NAME          ?= raylib_snake
 RAYLIB_VERSION        ?= 5.0.0
 RAYLIB_PATH           ?= ../raylib
 
@@ -197,7 +197,7 @@ endif
 #  -Wno-missing-braces  ignore invalid warning (GCC bug 53119)
 #  -Wno-unused-value    ignore unused return values of some functions (i.e. fread())
 #  -D_DEFAULT_SOURCE    use with -std=c99 on Linux and PLATFORM_WEB, required for timespec
-CFLAGS = -Wall -std=c99 -D_DEFAULT_SOURCE -Wno-missing-braces -Wunused-result
+CFLAGS = -Wall -Wextra -Wpedantic -std=c99 -D_DEFAULT_SOURCE -Wno-missing-braces -Wunused-result
 
 ifeq ($(BUILD_MODE),DEBUG)
     CFLAGS += -g -D_DEBUG
@@ -428,9 +428,11 @@ endif
 # Define source code object files required
 #------------------------------------------------------------------------------------------------
 SNAKE = \
-    src/snake
+    src/main
 
 CURRENT_MAKEFILE = $(lastword $(MAKEFILE_LIST))
+
+INCLUDE_PATHS += ./include
 
 # Define processes to execute
 #------------------------------------------------------------------------------------------------
