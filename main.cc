@@ -1,10 +1,14 @@
 #include "raylib.h"
 #include "snake.h"
+#include "object.h"
 #include <iostream>
+#include <vector>
 
 #define FPS 60
 
 #define MOVEMENT_SPEED 200.0f
+
+#define BORDER 20
 
 void updatePlayer(snake* player, float delta, int &signX, int &signY){
     if (IsKeyDown(KEY_UP)){
@@ -31,6 +35,15 @@ int main()
 
     // Define Objects
     Rectangle playerRec = {player.getPosition().x, player.getPosition().y, 40, 40};
+    std::vector<coin> coins;
+    srand(time(0));
+    for(int i = 0; i < 20; i++){
+        Vector2 pos = {(float)(rand()%(windowWidth-BORDER) + BORDER), 
+                       (float)(rand()%(windowHeight-BORDER) + BORDER)};
+        coins.push_back(coin(pos));
+        // std::cout << c.getPosition().x << "," << c.getPosition().y << std::endl;
+    }
+    
     float deltaTime = 0;
     int signX = 0, signY = 0;
 
@@ -47,6 +60,9 @@ int main()
         
         ClearBackground(RAYWHITE);
 
+        for (auto c : coins){
+            DrawCircle(c.getPosition().x, c.getPosition().y, 10, RED);
+        }
         playerRec.x = player.getPosition().x, playerRec.y = player.getPosition().y;
         DrawRectangleRec(playerRec, PINK);
 

@@ -9,7 +9,6 @@ class snake
 private:
     Vector2 position;
     float speed;
-    
 
 public:
     snake() : position({0, 0}), speed(0) {};
